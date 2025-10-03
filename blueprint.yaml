@@ -84,42 +84,56 @@ trigger:
 
 action:
   - variables:
-      remote: "{{ !input remote_name | trim | lower }}"
+      remote: "{{ remote_name | trim | lower }}"
       device: "{{ trigger.topic.split('/')[1] | trim | lower }}"
       action: "{{ trigger.payload_json.action }}"
-
   - choose:
-      - conditions: "{{ device == remote and action == 'off_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'off_1' }}"
         sequence: !input sc1_power_off
-      - conditions: "{{ device == remote and action == 'on_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'on_1' }}"
         sequence: !input sc1_power_on
-      - conditions: "{{ device == remote and action == 'brightness_step_down_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'brightness_step_down_1' }}"
         sequence: !input sc1_brightness_lower
-      - conditions: "{{ device == remote and action == 'brightness_step_up_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'brightness_step_up_1' }}"
         sequence: !input sc1_brightness_higher
-      - conditions: "{{ device == remote and action == 'color_temperature_step_down_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'color_temperature_step_down_1' }}"
         sequence: !input sc1_fire
-      - conditions: "{{ device == remote and action == 'color_temperature_step_up_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'color_temperature_step_up_1' }}"
         sequence: !input sc1_skip
-      - conditions: "{{ device == remote and action == 'snow_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'snow_1' }}"
         sequence: !input sc1_snow
-      - conditions: "{{ device == remote and action == 'recall_1_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_1_1' }}"
         sequence: !input sc1_s1
-      - conditions: "{{ device == remote and action == 'recall_2_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_2_1' }}"
         sequence: !input sc1_s2
-      - conditions: "{{ device == remote and action == 'recall_3_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_3_1' }}"
         sequence: !input sc1_s3
-      - conditions: "{{ device == remote and action == 'recall_4_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_4_1' }}"
         sequence: !input sc1_s4
-      - conditions: "{{ device == remote and action == 'recall_5_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_5_1' }}"
         sequence: !input sc1_s5
-      - conditions: "{{ device == remote and action == 'recall_6_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_6_1' }}"
         sequence: !input sc1_s6
-      - conditions: "{{ device == remote and action == 'recall_7_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'recall_7_1' }}"
         sequence: !input sc1_s7
-      - conditions: "{{ device == remote and action == 'repeat_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'repeat_1' }}"
         sequence: !input sc1_repeat
-      - conditions: "{{ device == remote and action == 'color_wheel_1' }}"
+      - conditions:
+          - "{{ device == remote and action == 'color_wheel_1' }}"
         sequence: !input sc1_color_wheel_button
-
-  default: []
+  - default: []
