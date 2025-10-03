@@ -76,65 +76,65 @@ blueprint:
       selector: { action: {} }
       default: []
 
-    # Scene 2 inputs (copy Scene 1 structure as needed)
+    # Scene 2 inputs
     sc2_power_off:
-      name: "⏻ Scene 2 - Power Off"
+      name: "⏻ Power - Off"
       selector: { action: {} }
       default: []
     sc2_power_on:
-      name: "⏻ Scene 2 - Power On"
+      name: "⏻ Power - On"
       selector: { action: {} }
       default: []
     sc2_brightness_lower:
-      name: "━ Scene 2 - Lower brightness"
+      name: "━ Lower brightness"
       selector: { action: {} }
       default: []
     sc2_brightness_higher:
-      name: "✚ Scene 2 - Higher brightness"
+      name: "✚ Higher brightness"
       selector: { action: {} }
       default: []
     sc2_s1:
-      name: "🔘 Scene 2 - S1"
+      name: "🔘 S1"
       selector: { action: {} }
       default: []
     sc2_s7:
-      name: "🔘 Scene 2 - S7"
+      name: "🔘 S7"
       selector: { action: {} }
       default: []
 
     # Scene 3 inputs
     sc3_power_off:
-      name: "⏻ Scene 3 - Power Off"
+      name: "⏻ Power - Off"
       selector: { action: {} }
       default: []
     sc3_power_on:
-      name: "⏻ Scene 3 - Power On"
+      name: "⏻ Power - On"
       selector: { action: {} }
       default: []
     sc3_s1:
-      name: "🔘 Scene 3 - S1"
+      name: "🔘 S1"
       selector: { action: {} }
       default: []
     sc3_s7:
-      name: "🔘 Scene 3 - S7"
+      name: "🔘 S7"
       selector: { action: {} }
       default: []
 
     # Scene 4 inputs
     sc4_power_off:
-      name: "⏻ Scene 4 - Power Off"
+      name: "⏻ Power - Off"
       selector: { action: {} }
       default: []
     sc4_power_on:
-      name: "⏻ Scene 4 - Power On"
+      name: "⏻ Power - On"
       selector: { action: {} }
       default: []
     sc4_s1:
-      name: "🔘 Scene 4 - S1"
+      name: "🔘 S1"
       selector: { action: {} }
       default: []
     sc4_s7:
-      name: "🔘 Scene 4 - S7"
+      name: "🔘 S7"
       selector: { action: {} }
       default: []
 
@@ -274,4 +274,4 @@ action:
             value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_7_4' }}"
         sequence: !input sc4_s7
 
-  default: []
+    default: []
