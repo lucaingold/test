@@ -10,7 +10,7 @@ blueprint:
       selector:
         text:
 
-    # Scene 1
+    # Scene 1 inputs
     sc1_power_off:
       name: "⏻ Power - Off"
       selector: { action: {} }
@@ -76,65 +76,65 @@ blueprint:
       selector: { action: {} }
       default: []
 
-    # Scene 2
+    # Scene 2 inputs (copy Scene 1 structure as needed)
     sc2_power_off:
-      name: "⏻ Power - Off"
+      name: "⏻ Scene 2 - Power Off"
       selector: { action: {} }
       default: []
     sc2_power_on:
-      name: "⏻ Power - On"
+      name: "⏻ Scene 2 - Power On"
       selector: { action: {} }
       default: []
     sc2_brightness_lower:
-      name: "━ Lower brightness"
+      name: "━ Scene 2 - Lower brightness"
       selector: { action: {} }
       default: []
     sc2_brightness_higher:
-      name: "✚ Higher brightness"
+      name: "✚ Scene 2 - Higher brightness"
       selector: { action: {} }
       default: []
     sc2_s1:
-      name: "🔘 S1"
+      name: "🔘 Scene 2 - S1"
       selector: { action: {} }
       default: []
     sc2_s7:
-      name: "🔘 S7"
+      name: "🔘 Scene 2 - S7"
       selector: { action: {} }
       default: []
 
-    # Scene 3
+    # Scene 3 inputs
     sc3_power_off:
-      name: "⏻ Power - Off"
+      name: "⏻ Scene 3 - Power Off"
       selector: { action: {} }
       default: []
     sc3_power_on:
-      name: "⏻ Power - On"
+      name: "⏻ Scene 3 - Power On"
       selector: { action: {} }
       default: []
     sc3_s1:
-      name: "🔘 S1"
+      name: "🔘 Scene 3 - S1"
       selector: { action: {} }
       default: []
     sc3_s7:
-      name: "🔘 S7"
+      name: "🔘 Scene 3 - S7"
       selector: { action: {} }
       default: []
 
-    # Scene 4
+    # Scene 4 inputs
     sc4_power_off:
-      name: "⏻ Power - Off"
+      name: "⏻ Scene 4 - Power Off"
       selector: { action: {} }
       default: []
     sc4_power_on:
-      name: "⏻ Power - On"
+      name: "⏻ Scene 4 - Power On"
       selector: { action: {} }
       default: []
     sc4_s1:
-      name: "🔘 S1"
+      name: "🔘 Scene 4 - S1"
       selector: { action: {} }
       default: []
     sc4_s7:
-      name: "🔘 S7"
+      name: "🔘 Scene 4 - S7"
       selector: { action: {} }
       default: []
 
