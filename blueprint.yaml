@@ -10,7 +10,7 @@ blueprint:
       selector:
         text:
 
-    # Scene 1 inputs
+    # Scene 1
     sc1_power_off:
       name: "⏻ Power - Off"
       selector: { action: {} }
@@ -76,7 +76,7 @@ blueprint:
       selector: { action: {} }
       default: []
 
-    # Scene 2 inputs
+    # Scene 2
     sc2_power_off:
       name: "⏻ Power - Off"
       selector: { action: {} }
@@ -102,7 +102,7 @@ blueprint:
       selector: { action: {} }
       default: []
 
-    # Scene 3 inputs
+    # Scene 3
     sc3_power_off:
       name: "⏻ Power - Off"
       selector: { action: {} }
@@ -120,7 +120,7 @@ blueprint:
       selector: { action: {} }
       default: []
 
-    # Scene 4 inputs
+    # Scene 4
     sc4_power_off:
       name: "⏻ Power - Off"
       selector: { action: {} }
@@ -145,127 +145,133 @@ trigger:
     topic: "zigbee2mqtt/+/action"
 
 action:
-  choose:
-    # Scene 1
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'off_1' }}"
-      sequence: !input sc1_power_off
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'on_1' }}"
-      sequence: !input sc1_power_on
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'brightness_step_down_1' }}"
-      sequence: !input sc1_brightness_lower
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'brightness_step_up_1' }}"
-      sequence: !input sc1_brightness_higher
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'color_temperature_step_down_1' }}"
-      sequence: !input sc1_fire
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'color_temperature_step_up_1' }}"
-      sequence: !input sc1_skip
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'snow_1' }}"
-      sequence: !input sc1_snow
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_1_1' }}"
-      sequence: !input sc1_s1
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_2_1' }}"
-      sequence: !input sc1_s2
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_3_1' }}"
-      sequence: !input sc1_s3
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_4_1' }}"
-      sequence: !input sc1_s4
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_5_1' }}"
-      sequence: !input sc1_s5
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_6_1' }}"
-      sequence: !input sc1_s6
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_7_1' }}"
-      sequence: !input sc1_s7
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'repeat_1' }}"
-      sequence: !input sc1_repeat
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'color_wheel_1' }}"
-      sequence: !input sc1_color_wheel_button
+  - choose:
+      # Scene 1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'off_1' }}"
+        sequence: !input sc1_power_off
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'on_1' }}"
+        sequence: !input sc1_power_on
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'brightness_step_down_1' }}"
+        sequence: !input sc1_brightness_lower
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'brightness_step_up_1' }}"
+        sequence: !input sc1_brightness_higher
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'color_temperature_step_down_1' }}"
+        sequence: !input sc1_fire
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'color_temperature_step_up_1' }}"
+        sequence: !input sc1_skip
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'snow_1' }}"
+        sequence: !input sc1_snow
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_1_1' }}"
+        sequence: !input sc1_s1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_2_1' }}"
+        sequence: !input sc1_s2
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_3_1' }}"
+        sequence: !input sc1_s3
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_4_1' }}"
+        sequence: !input sc1_s4
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_5_1' }}"
+        sequence: !input sc1_s5
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_6_1' }}"
+        sequence: !input sc1_s6
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_7_1' }}"
+        sequence: !input sc1_s7
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'repeat_1' }}"
+        sequence: !input sc1_repeat
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'color_wheel_1' }}"
+        sequence: !input sc1_color_wheel_button
 
-    # Scene 2
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'off_2' }}"
-      sequence: !input sc2_power_off
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'on_2' }}"
-      sequence: !input sc2_power_on
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'brightness_step_down_2' }}"
-      sequence: !input sc2_brightness_lower
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'brightness_step_up_2' }}"
-      sequence: !input sc2_brightness_higher
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_1_2' }}"
-      sequence: !input sc2_s1
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_7_2' }}"
-      sequence: !input sc2_s7
+      # Scene 2
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'off_2' }}"
+        sequence: !input sc2_power_off
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'on_2' }}"
+        sequence: !input sc2_power_on
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'brightness_step_down_2' }}"
+        sequence: !input sc2_brightness_lower
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'brightness_step_up_2' }}"
+        sequence: !input sc2_brightness_higher
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_1_2' }}"
+        sequence: !input sc2_s1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_7_2' }}"
+        sequence: !input sc2_s7
 
-    # Scene 3
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'off_3' }}"
-      sequence: !input sc3_power_off
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'on_3' }}"
-      sequence: !input sc3_power_on
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_1_3' }}"
-      sequence: !input sc3_s1
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_7_3' }}"
-      sequence: !input sc3_s7
+      # Scene 3
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'off_3' }}"
+        sequence: !input sc3_power_off
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'on_3' }}"
+        sequence: !input sc3_power_on
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_1_3' }}"
+        sequence: !input sc3_s1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_7_3' }}"
+        sequence: !input sc3_s7
 
-    # Scene 4
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'off_4' }}"
-      sequence: !input sc4_power_off
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'on_4' }}"
-      sequence: !input sc4_power_on
-    - conditions:
-        - "{{ trigger.topic.split('/')[1] == remote_name }}"
-        - "{{ trigger.payload_json.action == 'recall_1_4' }}"
-      sequenc
+      # Scene 4
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'off_4' }}"
+        sequence: !input sc4_power_off
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'on_4' }}"
+        sequence: !input sc4_power_on
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_1_4' }}"
+        sequence: !input sc4_s1
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.topic.split('/')[-2] == remote_name and trigger.payload == 'recall_7_4' }}"
+        sequence: !input sc4_s7
+
+  default: []
