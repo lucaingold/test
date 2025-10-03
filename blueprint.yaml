@@ -1,169 +1,136 @@
 blueprint:
   domain: automation
   name: "Paulmann Gent 2 (501.40) - Zigbee2MQTT"
-  description: "Steuerung des Paulmann Gent 2 Remotes über Zigbee2MQTT in Home Assistant."
+  description: >
+    Steuerung des Paulmann Gent 2 Remotes über Zigbee2MQTT.
+    Unterstützt on/off, brightness, recall 1–7 und color_temperature_move
+    für alle 4 Szenen.
 
   input:
-    remote_name:
-      name: "Paulmann Gent 2 remote (friendly_name)"
-      description: "Der Zigbee2MQTT friendly_name des Remotes."
+    remote_topic:
+      name: "MQTT Topic"
+      description: "z. B. zigbee2mqtt/paulmann_remote_ug_cinema/action"
       selector:
         text:
 
-    # --- Scene 1 ---
-    sc1_power_off: { name: "⏻ Power - Off (S1)", selector: { action: {} }, default: [] }
-    sc1_power_on: { name: "⏻ Power - On (S1)", selector: { action: {} }, default: [] }
-    sc1_brightness_lower: { name: "━ Lower brightness (S1)", selector: { action: {} }, default: [] }
-    sc1_brightness_higher: { name: "✚ Higher brightness (S1)", selector: { action: {} }, default: [] }
-    sc1_s1: { name: "🔘 S1", selector: { action: {} }, default: [] }
-    sc1_s2: { name: "🔘 S2", selector: { action: {} }, default: [] }
-    sc1_s3: { name: "🔘 S3", selector: { action: {} }, default: [] }
-    sc1_s4: { name: "🔘 S4", selector: { action: {} }, default: [] }
-    sc1_s5: { name: "🔘 S5", selector: { action: {} }, default: [] }
-    sc1_s6: { name: "🔘 S6", selector: { action: {} }, default: [] }
-    sc1_s7: { name: "🔘 S7", selector: { action: {} }, default: [] }
+    # Scene 1
+    sc1_power_on: { name: "S1 Power On", selector: { action: {} }, default: [] }
+    sc1_power_off: { name: "S1 Power Off", selector: { action: {} }, default: [] }
+    sc1_brightness_up: { name: "S1 Brightness Up", selector: { action: {} }, default: [] }
+    sc1_brightness_down: { name: "S1 Brightness Down", selector: { action: {} }, default: [] }
+    sc1_ct_move: { name: "S1 Color Temp Move", selector: { action: {} }, default: [] }
+    sc1_s1: { name: "S1 Recall 1", selector: { action: {} }, default: [] }
+    sc1_s2: { name: "S1 Recall 2", selector: { action: {} }, default: [] }
+    sc1_s3: { name: "S1 Recall 3", selector: { action: {} }, default: [] }
+    sc1_s4: { name: "S1 Recall 4", selector: { action: {} }, default: [] }
+    sc1_s5: { name: "S1 Recall 5", selector: { action: {} }, default: [] }
+    sc1_s6: { name: "S1 Recall 6", selector: { action: {} }, default: [] }
+    sc1_s7: { name: "S1 Recall 7", selector: { action: {} }, default: [] }
 
-    # --- Scene 2 ---
-    sc2_power_off: { name: "⏻ Power - Off (S2)", selector: { action: {} }, default: [] }
-    sc2_power_on: { name: "⏻ Power - On (S2)", selector: { action: {} }, default: [] }
-    sc2_brightness_lower: { name: "━ Lower brightness (S2)", selector: { action: {} }, default: [] }
-    sc2_brightness_higher: { name: "✚ Higher brightness (S2)", selector: { action: {} }, default: [] }
-    sc2_s1: { name: "🔘 S1", selector: { action: {} }, default: [] }
-    sc2_s2: { name: "🔘 S2", selector: { action: {} }, default: [] }
-    sc2_s3: { name: "🔘 S3", selector: { action: {} }, default: [] }
-    sc2_s4: { name: "🔘 S4", selector: { action: {} }, default: [] }
-    sc2_s5: { name: "🔘 S5", selector: { action: {} }, default: [] }
-    sc2_s6: { name: "🔘 S6", selector: { action: {} }, default: [] }
-    sc2_s7: { name: "🔘 S7", selector: { action: {} }, default: [] }
+    # Scene 2
+    sc2_power_on: { name: "S2 Power On", selector: { action: {} }, default: [] }
+    sc2_power_off: { name: "S2 Power Off", selector: { action: {} }, default: [] }
+    sc2_brightness_up: { name: "S2 Brightness Up", selector: { action: {} }, default: [] }
+    sc2_brightness_down: { name: "S2 Brightness Down", selector: { action: {} }, default: [] }
+    sc2_ct_move: { name: "S2 Color Temp Move", selector: { action: {} }, default: [] }
+    sc2_s1: { name: "S2 Recall 1", selector: { action: {} }, default: [] }
+    sc2_s2: { name: "S2 Recall 2", selector: { action: {} }, default: [] }
+    sc2_s3: { name: "S2 Recall 3", selector: { action: {} }, default: [] }
+    sc2_s4: { name: "S2 Recall 4", selector: { action: {} }, default: [] }
+    sc2_s5: { name: "S2 Recall 5", selector: { action: {} }, default: [] }
+    sc2_s6: { name: "S2 Recall 6", selector: { action: {} }, default: [] }
+    sc2_s7: { name: "S2 Recall 7", selector: { action: {} }, default: [] }
 
-    # --- Scene 3 ---
-    sc3_power_off: { name: "⏻ Power - Off (S3)", selector: { action: {} }, default: [] }
-    sc3_power_on: { name: "⏻ Power - On (S3)", selector: { action: {} }, default: [] }
-    sc3_brightness_lower: { name: "━ Lower brightness (S3)", selector: { action: {} }, default: [] }
-    sc3_brightness_higher: { name: "✚ Higher brightness (S3)", selector: { action: {} }, default: [] }
-    sc3_s1: { name: "🔘 S1", selector: { action: {} }, default: [] }
-    sc3_s2: { name: "🔘 S2", selector: { action: {} }, default: [] }
-    sc3_s3: { name: "🔘 S3", selector: { action: {} }, default: [] }
-    sc3_s4: { name: "🔘 S4", selector: { action: {} }, default: [] }
-    sc3_s5: { name: "🔘 S5", selector: { action: {} }, default: [] }
-    sc3_s6: { name: "🔘 S6", selector: { action: {} }, default: [] }
-    sc3_s7: { name: "🔘 S7", selector: { action: {} }, default: [] }
+    # Scene 3
+    sc3_power_on: { name: "S3 Power On", selector: { action: {} }, default: [] }
+    sc3_power_off: { name: "S3 Power Off", selector: { action: {} }, default: [] }
+    sc3_brightness_up: { name: "S3 Brightness Up", selector: { action: {} }, default: [] }
+    sc3_brightness_down: { name: "S3 Brightness Down", selector: { action: {} }, default: [] }
+    sc3_ct_move: { name: "S3 Color Temp Move", selector: { action: {} }, default: [] }
+    sc3_s1: { name: "S3 Recall 1", selector: { action: {} }, default: [] }
+    sc3_s2: { name: "S3 Recall 2", selector: { action: {} }, default: [] }
+    sc3_s3: { name: "S3 Recall 3", selector: { action: {} }, default: [] }
+    sc3_s4: { name: "S3 Recall 4", selector: { action: {} }, default: [] }
+    sc3_s5: { name: "S3 Recall 5", selector: { action: {} }, default: [] }
+    sc3_s6: { name: "S3 Recall 6", selector: { action: {} }, default: [] }
+    sc3_s7: { name: "S3 Recall 7", selector: { action: {} }, default: [] }
 
-    # --- Scene 4 ---
-    sc4_power_off: { name: "⏻ Power - Off (S4)", selector: { action: {} }, default: [] }
-    sc4_power_on: { name: "⏻ Power - On (S4)", selector: { action: {} }, default: [] }
-    sc4_brightness_lower: { name: "━ Lower brightness (S4)", selector: { action: {} }, default: [] }
-    sc4_brightness_higher: { name: "✚ Higher brightness (S4)", selector: { action: {} }, default: [] }
-    sc4_s1: { name: "🔘 S1", selector: { action: {} }, default: [] }
-    sc4_s2: { name: "🔘 S2", selector: { action: {} }, default: [] }
-    sc4_s3: { name: "🔘 S3", selector: { action: {} }, default: [] }
-    sc4_s4: { name: "🔘 S4", selector: { action: {} }, default: [] }
-    sc4_s5: { name: "🔘 S5", selector: { action: {} }, default: [] }
-    sc4_s6: { name: "🔘 S6", selector: { action: {} }, default: [] }
-    sc4_s7: { name: "🔘 S7", selector: { action: {} }, default: [] }
+    # Scene 4
+    sc4_power_on: { name: "S4 Power On", selector: { action: {} }, default: [] }
+    sc4_power_off: { name: "S4 Power Off", selector: { action: {} }, default: [] }
+    sc4_brightness_up: { name: "S4 Brightness Up", selector: { action: {} }, default: [] }
+    sc4_brightness_down: { name: "S4 Brightness Down", selector: { action: {} }, default: [] }
+    sc4_ct_move: { name: "S4 Color Temp Move", selector: { action: {} }, default: [] }
+    sc4_s1: { name: "S4 Recall 1", selector: { action: {} }, default: [] }
+    sc4_s2: { name: "S4 Recall 2", selector: { action: {} }, default: [] }
+    sc4_s3: { name: "S4 Recall 3", selector: { action: {} }, default: [] }
+    sc4_s4: { name: "S4 Recall 4", selector: { action: {} }, default: [] }
+    sc4_s5: { name: "S4 Recall 5", selector: { action: {} }, default: [] }
+    sc4_s6: { name: "S4 Recall 6", selector: { action: {} }, default: [] }
+    sc4_s7: { name: "S4 Recall 7", selector: { action: {} }, default: [] }
 
 mode: parallel
 
 trigger:
   - platform: mqtt
-    topic: "zigbee2mqtt/!input remote_name/action"
+    topic: !input remote_topic
 
 action:
   - choose:
       # --- Scene 1 ---
-      - conditions: "{{ trigger.payload == 'off_1' }}"
-        sequence: !input sc1_power_off
-      - conditions: "{{ trigger.payload == 'on_1' }}"
-        sequence: !input sc1_power_on
-      - conditions: "{{ trigger.payload == 'brightness_step_down_1' }}"
-        sequence: !input sc1_brightness_lower
-      - conditions: "{{ trigger.payload == 'brightness_step_up_1' }}"
-        sequence: !input sc1_brightness_higher
-      - conditions: "{{ trigger.payload == 'recall_1' }}"
-        sequence: !input sc1_s1
-      - conditions: "{{ trigger.payload == 'recall_2' }}"
-        sequence: !input sc1_s2
-      - conditions: "{{ trigger.payload == 'recall_3' }}"
-        sequence: !input sc1_s3
-      - conditions: "{{ trigger.payload == 'recall_4' }}"
-        sequence: !input sc1_s4
-      - conditions: "{{ trigger.payload == 'recall_5' }}"
-        sequence: !input sc1_s5
-      - conditions: "{{ trigger.payload == 'recall_6' }}"
-        sequence: !input sc1_s6
-      - conditions: "{{ trigger.payload == 'recall_7' }}"
-        sequence: !input sc1_s7
+      - conditions: "{{ trigger.payload == 'on_1' }}"   ; sequence: !input sc1_power_on
+      - conditions: "{{ trigger.payload == 'off_1' }}"  ; sequence: !input sc1_power_off
+      - conditions: "{{ trigger.payload == 'brightness_step_up_1' }}"   ; sequence: !input sc1_brightness_up
+      - conditions: "{{ trigger.payload == 'brightness_step_down_1' }}" ; sequence: !input sc1_brightness_down
+      - conditions: "{{ trigger.payload == 'color_temperature_move_1' }}" ; sequence: !input sc1_ct_move
+      - conditions: "{{ trigger.payload == 'recall_1_1' }}" ; sequence: !input sc1_s1
+      - conditions: "{{ trigger.payload == 'recall_2_1' }}" ; sequence: !input sc1_s2
+      - conditions: "{{ trigger.payload == 'recall_3_1' }}" ; sequence: !input sc1_s3
+      - conditions: "{{ trigger.payload == 'recall_4_1' }}" ; sequence: !input sc1_s4
+      - conditions: "{{ trigger.payload == 'recall_5_1' }}" ; sequence: !input sc1_s5
+      - conditions: "{{ trigger.payload == 'recall_6_1' }}" ; sequence: !input sc1_s6
+      - conditions: "{{ trigger.payload == 'recall_7_1' }}" ; sequence: !input sc1_s7
 
       # --- Scene 2 ---
-      - conditions: "{{ trigger.payload == 'off_2' }}"
-        sequence: !input sc2_power_off
-      - conditions: "{{ trigger.payload == 'on_2' }}"
-        sequence: !input sc2_power_on
-      - conditions: "{{ trigger.payload == 'brightness_step_down_2' }}"
-        sequence: !input sc2_brightness_lower
-      - conditions: "{{ trigger.payload == 'brightness_step_up_2' }}"
-        sequence: !input sc2_brightness_higher
-      - conditions: "{{ trigger.payload == 'recall_1_2' }}"
-        sequence: !input sc2_s1
-      - conditions: "{{ trigger.payload == 'recall_2_2' }}"
-        sequence: !input sc2_s2
-      - conditions: "{{ trigger.payload == 'recall_3_2' }}"
-        sequence: !input sc2_s3
-      - conditions: "{{ trigger.payload == 'recall_4_2' }}"
-        sequence: !input sc2_s4
-      - conditions: "{{ trigger.payload == 'recall_5_2' }}"
-        sequence: !input sc2_s5
-      - conditions: "{{ trigger.payload == 'recall_6_2' }}"
-        sequence: !input sc2_s6
-      - conditions: "{{ trigger.payload == 'recall_7_2' }}"
-        sequence: !input sc2_s7
+      - conditions: "{{ trigger.payload == 'on_2' }}"   ; sequence: !input sc2_power_on
+      - conditions: "{{ trigger.payload == 'off_2' }}"  ; sequence: !input sc2_power_off
+      - conditions: "{{ trigger.payload == 'brightness_step_up_2' }}"   ; sequence: !input sc2_brightness_up
+      - conditions: "{{ trigger.payload == 'brightness_step_down_2' }}" ; sequence: !input sc2_brightness_down
+      - conditions: "{{ trigger.payload == 'color_temperature_move_2' }}" ; sequence: !input sc2_ct_move
+      - conditions: "{{ trigger.payload == 'recall_1_2' }}" ; sequence: !input sc2_s1
+      - conditions: "{{ trigger.payload == 'recall_2_2' }}" ; sequence: !input sc2_s2
+      - conditions: "{{ trigger.payload == 'recall_3_2' }}" ; sequence: !input sc2_s3
+      - conditions: "{{ trigger.payload == 'recall_4_2' }}" ; sequence: !input sc2_s4
+      - conditions: "{{ trigger.payload == 'recall_5_2' }}" ; sequence: !input sc2_s5
+      - conditions: "{{ trigger.payload == 'recall_6_2' }}" ; sequence: !input sc2_s6
+      - conditions: "{{ trigger.payload == 'recall_7_2' }}" ; sequence: !input sc2_s7
 
       # --- Scene 3 ---
-      - conditions: "{{ trigger.payload == 'off_3' }}"
-        sequence: !input sc3_power_off
-      - conditions: "{{ trigger.payload == 'on_3' }}"
-        sequence: !input sc3_power_on
-      - conditions: "{{ trigger.payload == 'brightness_step_down_3' }}"
-        sequence: !input sc3_brightness_lower
-      - conditions: "{{ trigger.payload == 'brightness_step_up_3' }}"
-        sequence: !input sc3_brightness_higher
-      - conditions: "{{ trigger.payload == 'recall_1_3' }}"
-        sequence: !input sc3_s1
-      - conditions: "{{ trigger.payload == 'recall_2_3' }}"
-        sequence: !input sc3_s2
-      - conditions: "{{ trigger.payload == 'recall_3_3' }}"
-        sequence: !input sc3_s3
-      - conditions: "{{ trigger.payload == 'recall_4_3' }}"
-        sequence: !input sc3_s4
-      - conditions: "{{ trigger.payload == 'recall_5_3' }}"
-        sequence: !input sc3_s5
-      - conditions: "{{ trigger.payload == 'recall_6_3' }}"
-        sequence: !input sc3_s6
-      - conditions: "{{ trigger.payload == 'recall_7_3' }}"
-        sequence: !input sc3_s7
+      - conditions: "{{ trigger.payload == 'on_3' }}"   ; sequence: !input sc3_power_on
+      - conditions: "{{ trigger.payload == 'off_3' }}"  ; sequence: !input sc3_power_off
+      - conditions: "{{ trigger.payload == 'brightness_step_up_3' }}"   ; sequence: !input sc3_brightness_up
+      - conditions: "{{ trigger.payload == 'brightness_step_down_3' }}" ; sequence: !input sc3_brightness_down
+      - conditions: "{{ trigger.payload == 'color_temperature_move_3' }}" ; sequence: !input sc3_ct_move
+      - conditions: "{{ trigger.payload == 'recall_1_3' }}" ; sequence: !input sc3_s1
+      - conditions: "{{ trigger.payload == 'recall_2_3' }}" ; sequence: !input sc3_s2
+      - conditions: "{{ trigger.payload == 'recall_3_3' }}" ; sequence: !input sc3_s3
+      - conditions: "{{ trigger.payload == 'recall_4_3' }}" ; sequence: !input sc3_s4
+      - conditions: "{{ trigger.payload == 'recall_5_3' }}" ; sequence: !input sc3_s5
+      - conditions: "{{ trigger.payload == 'recall_6_3' }}" ; sequence: !input sc3_s6
+      - conditions: "{{ trigger.payload == 'recall_7_3' }}" ; sequence: !input sc3_s7
 
       # --- Scene 4 ---
-      - conditions: "{{ trigger.payload == 'off_4' }}"
-        sequence: !input sc4_power_off
-      - conditions: "{{ trigger.payload == 'on_4' }}"
-        sequence: !input sc4_power_on
-      - conditions: "{{ trigger.payload == 'brightness_step_down_4' }}"
-        sequence: !input sc4_brightness_lower
-      - conditions: "{{ trigger.payload == 'brightness_step_up_4' }}"
-        sequence: !input sc4_brightness_higher
-      - conditions: "{{ trigger.payload == 'recall_1_4' }}"
-        sequence: !input sc4_s1
-      - conditions: "{{ trigger.payload == 'recall_2_4' }}"
-        sequence: !input sc4_s2
-      - conditions: "{{ trigger.payload == 'recall_3_4' }}"
-        sequence: !input sc4_s3
-      - conditions: "{{ trigger.payload == 'recall_4_4' }}"
-        sequence: !input sc4_s4
-      - conditions: "{{ trigger.payload == 'recall_5_4' }}"
-        sequence: !input sc4_s5
-      - conditions: "{{ trigger.payload == 'recall_6_4' }}"
-        sequence: !input sc4_s6
-      - conditions: "{{ trigger.payload == 'recall_7_4' }}"
-        sequence: !input sc4_s7
+      - conditions: "{{ trigger.payload == 'on_4' }}"   ; sequence: !input sc4_power_on
+      - conditions: "{{ trigger.payload == 'off_4' }}"  ; sequence: !input sc4_power_off
+      - conditions: "{{ trigger.payload == 'brightness_step_up_4' }}"   ; sequence: !input sc4_brightness_up
+      - conditions: "{{ trigger.payload == 'brightness_step_down_4' }}" ; sequence: !input sc4_brightness_down
+      - conditions: "{{ trigger.payload == 'color_temperature_move_4' }}" ; sequence: !input sc4_ct_move
+      - conditions: "{{ trigger.payload == 'recall_1_4' }}" ; sequence: !input sc4_s1
+      - conditions: "{{ trigger.payload == 'recall_2_4' }}" ; sequence: !input sc4_s2
+      - conditions: "{{ trigger.payload == 'recall_3_4' }}" ; sequence: !input sc4_s3
+      - conditions: "{{ trigger.payload == 'recall_4_4' }}" ; sequence: !input sc4_s4
+      - conditions: "{{ trigger.payload == 'recall_5_4' }}" ; sequence: !input sc4_s5
+      - conditions: "{{ trigger.payload == 'recall_6_4' }}" ; sequence: !input sc4_s6
+      - conditions: "{{ trigger.payload == 'recall_7_4' }}" ; sequence: !input sc4_s7
 
     default: []
