@@ -10,74 +10,43 @@ blueprint:
       selector:
         text:
 
-    # Scene 1 inputs
-    sc1_power_off:
-      name: "⏻ Power - Off"
-      selector: { action: {} }
-      default: []
-    sc1_power_on:
-      name: "⏻ Power - On"
-      selector: { action: {} }
-      default: []
-    sc1_brightness_lower:
-      name: "━ Lower brightness"
-      selector: { action: {} }
-      default: []
-    sc1_brightness_higher:
-      name: "✚ Higher brightness"
-      selector: { action: {} }
-      default: []
-    sc1_fire:
-      name: "🔥 Fire"
-      selector: { action: {} }
-      default: []
-    sc1_skip:
-      name: "⏭️ Skip"
-      selector: { action: {} }
-      default: []
-    sc1_snow:
-      name: "❄️ Snow"
-      selector: { action: {} }
-      default: []
-    sc1_s1:
-      name: "🔘 S1"
-      selector: { action: {} }
-      default: []
-    sc1_s2:
-      name: "🔘 S2"
-      selector: { action: {} }
-      default: []
-    sc1_s3:
-      name: "🔘 S3"
-      selector: { action: {} }
-      default: []
-    sc1_s4:
-      name: "🔘 S4"
-      selector: { action: {} }
-      default: []
-    sc1_s5:
-      name: "🔘 S5"
-      selector: { action: {} }
-      default: []
-    sc1_s6:
-      name: "🔘 S6"
-      selector: { action: {} }
-      default: []
-    sc1_s7:
-      name: "🔘 S7"
-      selector: { action: {} }
-      default: []
-    sc1_repeat:
-      name: "🔄 Repeat"
-      selector: { action: {} }
-      default: []
-    sc1_color_wheel_button:
-      name: "◑ Color wheel - Button"
-      selector: { action: {} }
-      default: []
+    # ---------------- Scene 1 ----------------
+    sc1_power_off: { name: "⏻ Power - Off", selector: { action: {} }, default: [] }
+    sc1_power_on: { name: "⏻ Power - On", selector: { action: {} }, default: [] }
+    sc1_brightness_lower: { name: "━ Lower brightness", selector: { action: {} }, default: [] }
+    sc1_brightness_higher: { name: "✚ Higher brightness", selector: { action: {} }, default: [] }
+    sc1_fire: { name: "🔥 Fire", selector: { action: {} }, default: [] }
+    sc1_skip: { name: "⏭️ Skip", selector: { action: {} }, default: [] }
+    sc1_snow: { name: "❄️ Snow", selector: { action: {} }, default: [] }
+    sc1_s1: { name: "🔘 S1", selector: { action: {} }, default: [] }
+    sc1_s2: { name: "🔘 S2", selector: { action: {} }, default: [] }
+    sc1_s3: { name: "🔘 S3", selector: { action: {} }, default: [] }
+    sc1_s4: { name: "🔘 S4", selector: { action: {} }, default: [] }
+    sc1_s5: { name: "🔘 S5", selector: { action: {} }, default: [] }
+    sc1_s6: { name: "🔘 S6", selector: { action: {} }, default: [] }
+    sc1_s7: { name: "🔘 S7", selector: { action: {} }, default: [] }
+    sc1_repeat: { name: "🔄 Repeat", selector: { action: {} }, default: [] }
+    sc1_color_wheel_button: { name: "◑ Color wheel - Button", selector: { action: {} }, default: [] }
 
-    # You can copy the Scene 1 inputs to Scene 2, 3, and 4
-    # For brevity, I won't repeat them here, but it's the same structure.
+    # ---------------- Scene 2 ----------------
+    sc2_power_off: { name: "⏻ Power - Off (Scene 2)", selector: { action: {} }, default: [] }
+    sc2_power_on: { name: "⏻ Power - On (Scene 2)", selector: { action: {} }, default: [] }
+    sc2_brightness_lower: { name: "━ Lower brightness (Scene 2)", selector: { action: {} }, default: [] }
+    sc2_brightness_higher: { name: "✚ Higher brightness (Scene 2)", selector: { action: {} }, default: [] }
+    sc2_s1: { name: "🔘 S1 (Scene 2)", selector: { action: {} }, default: [] }
+    sc2_s7: { name: "🔘 S7 (Scene 2)", selector: { action: {} }, default: [] }
+
+    # ---------------- Scene 3 ----------------
+    sc3_power_off: { name: "⏻ Power - Off (Scene 3)", selector: { action: {} }, default: [] }
+    sc3_power_on: { name: "⏻ Power - On (Scene 3)", selector: { action: {} }, default: [] }
+    sc3_s1: { name: "🔘 S1 (Scene 3)", selector: { action: {} }, default: [] }
+    sc3_s7: { name: "🔘 S7 (Scene 3)", selector: { action: {} }, default: [] }
+
+    # ---------------- Scene 4 ----------------
+    sc4_power_off: { name: "⏻ Power - Off (Scene 4)", selector: { action: {} }, default: [] }
+    sc4_power_on: { name: "⏻ Power - On (Scene 4)", selector: { action: {} }, default: [] }
+    sc4_s1: { name: "🔘 S1 (Scene 4)", selector: { action: {} }, default: [] }
+    sc4_s7: { name: "🔘 S7 (Scene 4)", selector: { action: {} }, default: [] }
 
 mode: parallel
 
@@ -92,72 +61,158 @@ action:
       topic: "{{ trigger.topic.split('/')[-2] }}"
 
   - choose:
-      # Scene 1
-      - conditions: "{{ topic == remote and payload.action == 'off_1' }}"
+      # ---------------- Scene 1 ----------------
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "off_1" }}'
         sequence: !input sc1_power_off
-      - conditions: "{{ topic == remote and payload.action == 'on_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "on_1" }}'
         sequence: !input sc1_power_on
-      - conditions: "{{ topic == remote and payload.action == 'brightness_step_down_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "brightness_step_down_1" }}'
         sequence: !input sc1_brightness_lower
-      - conditions: "{{ topic == remote and payload.action == 'brightness_step_up_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "brightness_step_up_1" }}'
         sequence: !input sc1_brightness_higher
-      - conditions: "{{ topic == remote and payload.action == 'color_temperature_step_down_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "color_temperature_step_down_1" }}'
         sequence: !input sc1_fire
-      - conditions: "{{ topic == remote and payload.action == 'color_temperature_step_up_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "color_temperature_step_up_1" }}'
         sequence: !input sc1_skip
-      - conditions: "{{ topic == remote and payload.action == 'snow_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "snow_1" }}'
         sequence: !input sc1_snow
-      - conditions: "{{ topic == remote and payload.action == 'recall_1_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_1_1" }}'
         sequence: !input sc1_s1
-      - conditions: "{{ topic == remote and payload.action == 'recall_2_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_2_1" }}'
         sequence: !input sc1_s2
-      - conditions: "{{ topic == remote and payload.action == 'recall_3_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_3_1" }}'
         sequence: !input sc1_s3
-      - conditions: "{{ topic == remote and payload.action == 'recall_4_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_4_1" }}'
         sequence: !input sc1_s4
-      - conditions: "{{ topic == remote and payload.action == 'recall_5_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_5_1" }}'
         sequence: !input sc1_s5
-      - conditions: "{{ topic == remote and payload.action == 'recall_6_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_6_1" }}'
         sequence: !input sc1_s6
-      - conditions: "{{ topic == remote and payload.action == 'recall_7_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_7_1" }}'
         sequence: !input sc1_s7
-      - conditions: "{{ topic == remote and payload.action == 'repeat_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "repeat_1" }}'
         sequence: !input sc1_repeat
-      - conditions: "{{ topic == remote and payload.action == 'color_wheel_1' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "color_wheel_1" }}'
         sequence: !input sc1_color_wheel_button
 
-      # Scene 2
-      - conditions: "{{ topic == remote and payload.action == 'off_2' }}"
+      # ---------------- Scene 2 ----------------
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "off_2" }}'
         sequence: !input sc2_power_off
-      - conditions: "{{ topic == remote and payload.action == 'on_2' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "on_2" }}'
         sequence: !input sc2_power_on
-      - conditions: "{{ topic == remote and payload.action == 'brightness_step_down_2' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "brightness_step_down_2" }}'
         sequence: !input sc2_brightness_lower
-      - conditions: "{{ topic == remote and payload.action == 'brightness_step_up_2' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "brightness_step_up_2" }}'
         sequence: !input sc2_brightness_higher
-      - conditions: "{{ topic == remote and payload.action == 'recall_1_2' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_1_2" }}'
         sequence: !input sc2_s1
-      - conditions: "{{ topic == remote and payload.action == 'recall_7_2' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_7_2" }}'
         sequence: !input sc2_s7
 
-      # Scene 3
-      - conditions: "{{ topic == remote and payload.action == 'off_3' }}"
+      # ---------------- Scene 3 ----------------
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "off_3" }}'
         sequence: !input sc3_power_off
-      - conditions: "{{ topic == remote and payload.action == 'on_3' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "on_3" }}'
         sequence: !input sc3_power_on
-      - conditions: "{{ topic == remote and payload.action == 'recall_1_3' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_1_3" }}'
         sequence: !input sc3_s1
-      - conditions: "{{ topic == remote and payload.action == 'recall_7_3' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_7_3" }}'
         sequence: !input sc3_s7
 
-      # Scene 4
-      - conditions: "{{ topic == remote and payload.action == 'off_4' }}"
+      # ---------------- Scene 4 ----------------
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "off_4" }}'
         sequence: !input sc4_power_off
-      - conditions: "{{ topic == remote and payload.action == 'on_4' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "on_4" }}'
         sequence: !input sc4_power_on
-      - conditions: "{{ topic == remote and payload.action == 'recall_1_4' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_1_4" }}'
         sequence: !input sc4_s1
-      - conditions: "{{ topic == remote and payload.action == 'recall_7_4' }}"
+
+      - conditions:
+          - condition: template
+            value_template: '{{ topic == remote and payload.action == "recall_7_4" }}'
         sequence: !input sc4_s7
 
-  default: []
+    default: []
